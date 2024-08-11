@@ -1,0 +1,10 @@
+package com.bank.loneapplication.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.bank.loneapplication.entity.Loan;
+
+public interface LoanRepository extends JpaRepository<Loan,Long> {
+
+
+}

@@ -1,0 +1,37 @@
+package com.example.customerservice.config;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.reactive.LoadBalancedExchangeFilterFunction;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.support.WebClientAdapter;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
+
+import com.example.customerservice.client.LoneClient;
+
+@Configuration
+public class WebClientConfig {
+
+    @Autowired
+    private LoadBalancedExchangeFilterFunction filterFunction;
+
+
+    @Bean
+    public WebClient loneWebClient() {
+        return WebClient.builder()
+                .baseUrl("http://lone-service")
+                .filter(filterFunction)
+                .build();
+    }
+
+    @Bean
+    public LoneClient employeeClient() {
+        HttpServiceProxyFactory httpServiceProxyFactory
+                = HttpServiceProxyFactory
+                .builder(WebClientAdapter.forClient(loneWebClient()))
+                .build();
+        return httpServiceProxyFactory.createClient(LoneClient.class);
+    }
+}

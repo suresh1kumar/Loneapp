@@ -1,0 +1,31 @@
+package com.bank.customer.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
+
+import com.bank.customer.dto.CustomMapper;
+import com.bank.customer.dto.CustomerDTO;
+import com.bank.customer.entity.Customer;
+import com.bank.customer.exception.CustomerNotFoundException;
+import com.bank.customer.repository.CustomerRepository;
+
+import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+public class CustomerService {
+    private final CustomerRepository customerRepository;
+
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
+   public void addCustomer(Customer customer) {
+	   customerRepository.save(customer);
+   }
+
+}

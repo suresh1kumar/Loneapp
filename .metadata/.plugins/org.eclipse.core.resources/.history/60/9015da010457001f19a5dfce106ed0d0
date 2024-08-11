@@ -1,0 +1,11 @@
+package com.bank.customer.client;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@FeignClient(name="LONEAPPLICATION-SERVICE")
+public interface CreateLoanApplication {
+
+	@PostMapping("/rating")
+	public Rating createRating(Rating rating);
+}

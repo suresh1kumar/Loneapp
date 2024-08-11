@@ -1,0 +1,37 @@
+package com.bank.loneapplication.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bank.loneapplication.repository.LoanApplicationRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+
+public class LoanApplicationService {
+
+   @Autowired
+    private LoanApplicationRepository loanApplicationRepository;
+
+   @PostMapping
+   public Employee add(@RequestBody Employee employee) {
+       LOGGER.info("Employee add: {}", employee);
+       return repository.add(employee);
+   }
+
+   @GetMapping
+   public List<Employee> findAll() {
+       LOGGER.info("Employee find");
+       return repository.findAll();
+   }
+
+   
+   @GetMapping("/department/{departmentId}")
+   public List<Employee> findByDepartment(@PathVariable("departmentId") Long departmentId) {
+       LOGGER.info("Employee find: departmentId={}", departmentId);
+       return repository.findByDepartment(departmentId);
+   }
+    
+
+}

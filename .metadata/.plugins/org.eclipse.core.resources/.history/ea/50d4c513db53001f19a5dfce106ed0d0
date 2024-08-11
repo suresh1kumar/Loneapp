@@ -1,0 +1,5 @@
+package com.bank.loneapplication.entity;
+
+public class LoanApplication {
+
+}

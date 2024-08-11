@@ -1,0 +1,29 @@
+package com.bank.notification.client;
+
+import java.util.Optional;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.bank.notification.dto.LoanApplicationDto;
+
+//@HttpExchange
+@FeignClient(name="CUSTOMER-SERVICE")
+public interface LoanApplicationClient {
+	
+	    
+	 @GetMapping("/customer/get/{nationalIdentityNumber}")
+	    public CustomerDTO getCustomerByNationalIdentityNumber(@PathVariable("nationalIdentityNumber") String nationalIdentityNumber);
+	     
+	 @GetMapping(value = "/loneapplication/{loneId}")
+     public ResponseEntity<LoanApplicationDto> getLoanApplicationByIds(@PathVariable Long loneId) ;
+}
+
+
+
+
+
+
+

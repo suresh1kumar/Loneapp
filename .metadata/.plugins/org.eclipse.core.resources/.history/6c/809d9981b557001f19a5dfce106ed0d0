@@ -1,0 +1,26 @@
+package com.bank.notification.client;
+
+import java.util.Optional;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.bank.notification.dto.LoanApplicationDto;
+
+//@HttpExchange
+@FeignClient(name="LONEAPPLICATION-SERVICE")
+public interface LoanApplicationClient {
+	
+	   
+	 @GetMapping(value = "/loneapp/loneapplication/{loneId}")
+     public ResponseEntity<LoanApplicationDto> getLoanApplicationByIds(@PathVariable("loneId") Long loneId) ;
+}
+
+
+
+
+
+
+

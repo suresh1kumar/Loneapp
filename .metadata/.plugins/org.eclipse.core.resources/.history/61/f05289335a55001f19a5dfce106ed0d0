@@ -1,0 +1,49 @@
+package com.bank.loneapplication.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.bank.loneapplication.dto.LoanApplicationDto;
+import com.bank.loneapplication.entity.LoanApplication;
+import com.bank.loneapplication.repository.LoanApplicationRepository;
+
+@Service
+
+public class LoanApplicationService {
+
+   @Autowired
+    private LoanApplicationRepository loanApplicationRepository;
+
+ 
+   @PostMapping
+   public LoanApplication add(@RequestBody LoanApplication employee) {
+  
+       return loanApplicationRepository.save(employee);
+   }
+
+   @GetMapping
+   public List<LoanApplication> findAll() {
+     
+       return loanApplicationRepository.findAll();
+   }
+
+   
+  
+   public List<LoanApplicationDto> findByNationalIdentityNumber(String nationalIdentityNumber) {
+
+	   return loanApplicationRepository.findAll().stream()
+               .filter(a -> a.nationalIdentityNumber().equals(nationalIdentityNumber))
+               .toList(); 
+       
+   }
+   
+  
+    
+
+}

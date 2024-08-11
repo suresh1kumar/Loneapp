@@ -1,0 +1,32 @@
+package com.bank.loneapplication.client;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.service.annotation.GetExchange;
+import org.springframework.web.service.annotation.HttpExchange;
+
+import com.bank.customer.entity.Customer;
+
+
+@HttpExchange
+public interface CustomerClient {
+	
+	    @GetExchange("/loneapplication/customer/{nationalIdentityNumber}")
+	    public List<LoanApplicationRecord> findByCustomer(@PathVariable("nationalIdentityNumber") Long customerId);
+	    
+	    
+	    @GetExchange("/loneapp/{nationalIdentityNumber}")
+	    public Customer findByDepartment(@PathVariable("nationalIdentityNumber") String nationalIdentityNumber)
+
+
+}
+
+
+
+
+//public LoanApplication(Long id,Customer customer, Loan loan,Notification notification,Loan loan) 
+
+
+

@@ -1,0 +1,19 @@
+package com.bank.loneapplication.service;
+
+import org.springframework.stereotype.Service;
+
+import com.bank.loneapplication.repository.LoanApplicationRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+public class LoanApplicationService {
+
+    private  LoanRepository loanRepository;
+    private CustomerRepository customerRepository;
+    private LoanApplicationRepository loanApplicationRepository;
+
+    
+
+}

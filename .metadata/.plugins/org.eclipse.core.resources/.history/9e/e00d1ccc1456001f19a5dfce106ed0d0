@@ -1,0 +1,54 @@
+package com.bank.customer.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import com.bank.customer.client.LoanApplicationClient;
+import com.bank.customer.dto.LoanApplicationDto;
+import com.bank.customer.entity.Customer;
+import com.bank.customer.repository.CustomerRepository;
+
+@Service
+public class CustomerService {
+    private final CustomerRepository customerRepository;
+
+    @Autowired
+    private WebClient webClient;
+    
+    @Autowired
+    private LoanApplicationClient loanApplicationClient;
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
+   public void addCustomer(Customer customer) {
+	   
+	  // LoanApplicationDto l= loanApplicationClient.findByNationalIdentityNumber(customer.getNationalIdentityNumber());
+	   
+	   
+	   customerRepository.save(customer);
+	   LoanApplicationDto p=new LoanApplicationDto();
+	   p.setNationalIdentityNumber(customer.getNationalIdentityNumber());
+	   System.out.println("ddddddddddddd");
+	   webClient.post()
+	   .uri("http://localhost:8082/loneapp/add-lone-customer")
+	         
+	   //.retrieve()
+	   //.bodyToMono(LoanApplicationDto.class)
+	   //.block();
+	   
+	   .bodyValue(p) // Body of the POST request
+       .retrieve()
+       .bodyToMono(LoanApplicationDto.class) // Expecting a response of type String
+       .doOnError(e -> System.err.println("Error: " + e.getMessage()));
+	   System.out.println("--------------------------:" +p);
+   }
+   
+   public List<Customer> getAllCustomers(){
+	   return customerRepository.findAll();
+   }
+
+}

@@ -1,0 +1,13 @@
+package com.bank.customer.client;
+
+import org.springframework.cloud.client.loadbalancer.reactive.LoadBalancedExchangeFilterFunction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class WebClientConfig {
+	
+	@Autowired
+    private LoadBalancedExchangeFilterFunction filterFunction;
+
+}
